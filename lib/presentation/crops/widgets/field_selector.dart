@@ -1,5 +1,4 @@
-import 'package:agriflow/presentation/crops/widgets/field_selector.dart';
-import 'package:agriflow/presentation/crops/widgets/field_view.dart';
+import 'package:agriflow/presentation/crops/pages/crops_screen.dart';
 import 'package:flutter/material.dart';
 
 class Field {
@@ -9,25 +8,9 @@ class Field {
   Field({required this.name, required this.recommendations});
 }
 
-class CropRecommendation {
-  final String cropName;
-  final int percentage;
-  final String description;
-
-  CropRecommendation(
-      {required this.cropName,
-      required this.percentage,
-      required this.description});
-}
-
-class CropsScreen extends StatefulWidget {
-  const CropsScreen({super.key});
-
-  @override
-  State<CropsScreen> createState() => _CropsScreenState();
-}
-
-class _CropsScreenState extends State<CropsScreen> {
+class FieldSelector extends StatelessWidget {
+  FieldSelector({super.key});
+  int selectedFieldIndex = 0;
   final List<Field> fields = [
     Field(
       name: 'Field 1',
@@ -81,29 +64,37 @@ class _CropsScreenState extends State<CropsScreen> {
       ],
     ),
   ];
-
-  int selectedFieldIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FieldSelector(),
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: fields[selectedFieldIndex].recommendations.length,
-            itemBuilder: (context, index) {
-              final recommendation =
-                  fields[selectedFieldIndex].recommendations[index];
-
-              return FieldView(
-                recommendation: recommendation,
-              );
-            },
-          ),
-        ),
-      ],
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: fields.length,
+        itemBuilder: (context, index) {
+          final isSelected = selectedFieldIndex == index;
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: ChoiceChip(
+              label: Text(fields[index].name),
+              selected: isSelected,
+              onSelected: (selected) {
+                if (selected) {
+                  // setState(() {
+                  //   selectedFieldIndex = index;
+                  // });
+                }
+              },
+              selectedColor: Colors.green[100],
+              labelStyle: TextStyle(
+                color: isSelected ? Colors.green : Colors.black,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

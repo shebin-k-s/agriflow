@@ -1,3 +1,4 @@
+import 'package:agriflow/presentation/addfield/pages/add_field.dart';
 import 'package:agriflow/presentation/crops/pages/crops_screen.dart';
 import 'package:agriflow/presentation/dashboard/pages/dashboard_screen.dart';
 import 'package:agriflow/presentation/fields/pages/fields_screen.dart';
@@ -15,7 +16,7 @@ class MainScreen extends StatelessWidget {
     final List<Widget> pages = [
       const DashboardScreen(),
       const FieldsScreen(),
-      CropsScreen(),
+      const CropsScreen(),
       ProfileScreen(),
     ];
     return BlocProvider(
@@ -23,9 +24,24 @@ class MainScreen extends StatelessWidget {
       child: BlocBuilder<BottomNavigationCubit, BottomNavigationState>(
         builder: (context, state) {
           return Scaffold(
+            appBar: AppBar(
+              title: const Text('AgriFlow'),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.notifications),
+                  onPressed: () {},
+                ),
+              ],
+            ),
             body: pages[state.selectedIndex],
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AddFieldScreen(),
+                  ),
+                );
+              },
               backgroundColor: Colors.green,
               child: const Icon(Icons.add),
             ),
