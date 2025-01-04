@@ -24,7 +24,7 @@ class FieldCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      field.name,
+                      field.fieldName,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

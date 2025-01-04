@@ -1,6 +1,7 @@
 class FieldEntity {
-  final String name;
+  final String fieldName;
   final String currentCrop;
+  final bool deviceStatus;
   final double moisture;
   final double temperature;
   final double pH;
@@ -10,7 +11,8 @@ class FieldEntity {
   final String deviceId;
 
   FieldEntity({
-    required this.name,
+    this.deviceStatus = false,
+    required this.fieldName,
     required this.currentCrop,
     required this.moisture,
     required this.temperature,

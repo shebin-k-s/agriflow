@@ -1,3 +1,6 @@
+import 'package:agriflow/presentation/auth/pages/signin.dart';
+import 'package:agriflow/presentation/crops/bloc/field_selector/field_selector_cubit.dart';
+import 'package:agriflow/presentation/crops/bloc/recommendation/recommendation_cubit.dart';
 import 'package:agriflow/presentation/dashboard/bloc/cubit/fields_cubit.dart';
 import 'package:agriflow/presentation/main/pages/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +19,16 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => FieldsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RecommendationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FieldSelectorCubit(),
         )
       ],
-      child: const MaterialApp(
-        home: MainScreen(),
+      child: MaterialApp(
+        home: SigninScreen(),
       ),
     );
   }

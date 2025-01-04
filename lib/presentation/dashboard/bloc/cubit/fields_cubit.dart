@@ -10,7 +10,7 @@ class FieldsCubit extends Cubit<FieldsState> {
   void loadFields() {
     final List<FieldEntity> fields = [
       FieldEntity(
-        name: 'Field 1',
+        fieldName: 'Field 1',
         currentCrop: 'Cotton',
         moisture: 75,
         temperature: 25,
@@ -21,7 +21,7 @@ class FieldsCubit extends Cubit<FieldsState> {
         deviceId: 'DEV001',
       ),
       FieldEntity(
-        name: 'Field 2',
+        fieldName: 'Field 2',
         currentCrop: 'Wheat',
         moisture: 65,
         temperature: 23,
@@ -32,7 +32,7 @@ class FieldsCubit extends Cubit<FieldsState> {
         deviceId: 'DEV002',
       ),
       FieldEntity(
-        name: 'Field 3',
+        fieldName: 'Field 3',
         currentCrop: 'Rice',
         moisture: 80,
         temperature: 26,

@@ -1,14 +1,14 @@
+import 'package:agriflow/domain/entities/recommendation/crop_recommendation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:agriflow/presentation/crops/pages/crops_screen.dart';
 
 class FieldView extends StatelessWidget {
   const FieldView({
     super.key,
-    required this.recommendation,
+    required this.crops,
   });
 
-  final CropRecommendation recommendation;
+  final Crops crops;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class FieldView extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Colors.green[100],
                   child: Text(
-                    recommendation.cropName[0],
+                    crops.cropName[0],
                     style: const TextStyle(color: Colors.green),
                   ),
                 ),
@@ -34,7 +34,7 @@ class FieldView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        recommendation.cropName,
+                        crops.cropName,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class FieldView extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        recommendation.description,
+                        crops.description,
                         style: TextStyle(
                           color: Colors.grey[600],
                           fontSize: 12,
@@ -52,7 +52,7 @@ class FieldView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${recommendation.percentage}%',
+                  '${crops.percentage}%',
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class FieldView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             LinearProgressIndicator(
-              value: recommendation.percentage / 100,
+              value: crops.percentage / 100,
               backgroundColor: Colors.grey[200],
               valueColor: AlwaysStoppedAnimation(Colors.green[400]!),
             ),
