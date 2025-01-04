@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
     final List<Widget> pages = [
       const DashboardScreen(),
       const FieldsScreen(),
-      const CropsScreen(),
+       CropsScreen(),
       const ProfileScreen(),
     ];
     return BlocProvider(

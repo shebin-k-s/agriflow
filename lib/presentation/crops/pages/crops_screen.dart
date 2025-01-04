@@ -6,7 +6,7 @@ class CropsScreen extends StatefulWidget {
 }
 
 class _CropsScreenState extends State<CropsScreen> {
-  int selectedField = 1; // Tracks the selected field (1, 2, or 3)
+  int selectedField = 1;
 
   @override
   Widget build(BuildContext context) {
