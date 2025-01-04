@@ -15,8 +15,8 @@ class MainScreen extends StatelessWidget {
     final List<Widget> pages = [
       const DashboardScreen(),
       const FieldsScreen(),
-       CropsScreen(),
-      const ProfileScreen(),
+      CropsScreen(),
+      ProfileScreen(),
     ];
     return BlocProvider(
       create: (context) => BottomNavigationCubit(),
