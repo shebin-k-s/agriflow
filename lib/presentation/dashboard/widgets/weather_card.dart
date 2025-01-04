@@ -1,3 +1,4 @@
+import 'package:agriflow/presentation/dashboard/widgets/weather_item.dart';
 import 'package:flutter/material.dart';
 
 class WeatherCard extends StatelessWidget {
@@ -5,41 +6,43 @@ class WeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Weather Forecast',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildWeatherItem('Today', Icons.wb_sunny, '25°C'),
-                _buildWeatherItem('Tomorrow', Icons.cloud, '23°C'),
-                _buildWeatherItem('Day After', Icons.water_drop, '22°C'),
+                WeatherItem(
+                  day: 'Today',
+                  icon: Icons.wb_sunny,
+                  temp: '25°C',
+                ),
+                WeatherItem(
+                  day: 'Tomorrow',
+                  icon: Icons.cloud,
+                  temp: '23°C',
+                ),
+                WeatherItem(
+                  day: 'Day After',
+                  icon: Icons.water_drop,
+                  temp: '22°C',
+                ),
               ],
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildWeatherItem(String day, IconData icon, String temp) {
-    return Column(
-      children: [
-        Text(day),
-        Icon(icon, color: Colors.blue),
-        Text(temp),
-      ],
     );
   }
 }

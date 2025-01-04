@@ -1,4 +1,4 @@
-import 'package:agriflow/presentation/dashboard/pages/dashboard_screen.dart';
+import 'package:agriflow/domain/entities/field/field.dart';
 import 'package:agriflow/presentation/dashboard/widgets/parameter_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class FieldCard extends StatelessWidget {
   const FieldCard({super.key, required this.field});
 
-  final Field field;
+  final FieldEntity field;
 
   @override
   Widget build(BuildContext context) {
