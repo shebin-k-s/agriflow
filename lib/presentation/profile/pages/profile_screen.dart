@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class ProfileScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProfileScreen(),
-    );
-  }
-}
-
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'AgriFlow',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
@@ -28,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             color: Colors.black,
             onPressed: () {},
           ),
@@ -39,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: Column(
                 children: [
                   CircleAvatar(
@@ -63,56 +49,57 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Farm Information',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Card(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               child: ListTile(
-                title: Text('Total Fields: 3'),
-                subtitle: Text('Total Area: 150 acres\nActive Crops: Cotton, Wheat, Rice'),
-                trailing: Icon(Icons.arrow_forward_ios),
+                title: const Text('Total Fields: 3'),
+                subtitle: const Text(
+                    'Total Area: 150 acres\nActive Crops: Cotton, Wheat, Rice'),
+                trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () {},
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Account Settings',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Card(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               child: Column(
                 children: [
                   ListTile(
-                    title: Text('Edit Profile'),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    title: const Text('Edit Profile'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {},
                   ),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   ListTile(
-                    title: Text('Notification Settings'),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    title: const Text('Notification Settings'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {},
                   ),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   ListTile(
-                    title: Text('Language'),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    title: const Text('Language'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {},
                   ),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   ListTile(
-                    title: Text('Help & Support'),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    title: const Text('Help & Support'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {},
                   ),
-                  Divider(height: 1),
+                  const Divider(height: 1),
                   ListTile(
-                    title: Text('About'),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    title: const Text('About'),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {},
                   ),
                 ],
@@ -121,34 +108,6 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3,
-        selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Fields',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.agriculture),
-            label: 'Crops',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
-  }
+    );
+  }
 }

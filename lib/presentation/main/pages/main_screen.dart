@@ -16,7 +16,7 @@ class MainScreen extends StatelessWidget {
       const DashboardScreen(),
       const FieldsScreen(),
       const CropsScreen(),
-      const ProfileScreen(),
+       ProfileScreen(),
     ];
     return BlocProvider(
       create: (context) => BottomNavigationCubit(),
