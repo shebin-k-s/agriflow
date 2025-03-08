@@ -7,6 +7,7 @@ class BasicAppButton extends StatelessWidget {
   final double? width;
   final bool isLoading;
   final double? titleSize;
+  final Color? backgroundColor;
 
   const BasicAppButton({
     super.key,
@@ -16,6 +17,7 @@ class BasicAppButton extends StatelessWidget {
     this.width,
     this.isLoading = false,
     this.titleSize,
+    this.backgroundColor,
   });
 
   @override
@@ -26,7 +28,7 @@ class BasicAppButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange.shade600,
+          backgroundColor: backgroundColor ?? Colors.orange.shade600,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),

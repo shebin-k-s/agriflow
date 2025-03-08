@@ -49,6 +49,5 @@ class ParameterCard extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

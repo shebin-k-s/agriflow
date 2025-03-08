@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:agriflow/presentation/dashboard/bloc/cubit/fields_cubit.dart';
 import 'package:agriflow/presentation/dashboard/widgets/field_card.dart';
 import 'package:agriflow/presentation/dashboard/widgets/weather_card.dart';
@@ -35,6 +37,21 @@ class DashboardScreen extends StatelessWidget {
                 );
               }
               if (state is FieldsLoaded) {
+                log("fields loaded");
+                if (state.fields.isEmpty) {
+                  return SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: const Center(
+                        child: Text(
+                          "No Fields Exist",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  );
+                }
                 final fields = state.fields;
                 return ListView.separated(
                   itemBuilder: (context, index) {

@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
       const DashboardScreen(),
       const FieldsScreen(),
       const CropsScreen(),
-      ProfileScreen(),
+      const ProfileScreen(),
     ];
     return BlocProvider(
       create: (context) => BottomNavigationCubit(),
@@ -26,24 +26,22 @@ class MainScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: const Text('AgriFlow'),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.notifications),
-                  onPressed: () {},
-                ),
-              ],
+              forceMaterialTransparency: true,
             ),
             body: pages[state.selectedIndex],
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AddFieldScreen(),
+                    builder: (context) => const AddFieldScreen(),
                   ),
                 );
               },
               backgroundColor: Colors.green,
-              child: const Icon(Icons.add),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
             bottomNavigationBar: BasicBottomNavigation(
               currentIndex: state.selectedIndex,

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class FieldCard extends StatelessWidget {
   const FieldCard({super.key, required this.field});
 
-  final FieldEntity field;
+  final FieldData field;
 
   @override
   Widget build(BuildContext context) {
@@ -60,37 +60,37 @@ class FieldCard extends StatelessWidget {
               children: [
                 ParameterCard(
                   title: 'Moisture',
-                  value: '${field.moisture}%',
+                  value: '${field.sensorReadings.moisture}%',
                   icon: Icons.water_drop,
                   color: Colors.blue,
                 ),
                 ParameterCard(
                   title: 'Temperature',
-                  value: '${field.temperature}°C',
+                  value: '${field.sensorReadings.temperature}°C',
                   icon: Icons.thermostat,
                   color: Colors.orange,
                 ),
                 ParameterCard(
                   title: 'pH',
-                  value: '${field.pH}',
+                  value: '${field.sensorReadings.pH}',
                   icon: Icons.science,
                   color: Colors.purple,
                 ),
                 ParameterCard(
                   title: 'Nitrogen',
-                  value: '${field.nitrogen} mg/kg',
+                  value: '${field.sensorReadings.nitrogen} mg/kg',
                   icon: Icons.grass,
                   color: Colors.green,
                 ),
                 ParameterCard(
                   title: 'Phosphorus',
-                  value: '${field.phosphorus} mg/kg',
+                  value: '${field.sensorReadings.phosphorus} mg/kg',
                   icon: Icons.grass,
                   color: Colors.green,
                 ),
                 ParameterCard(
                   title: 'Potassium',
-                  value: '${field.potassium} mg/kg',
+                  value: '${field.sensorReadings.potassium} mg/kg',
                   icon: Icons.grass,
                   color: Colors.green,
                 ),

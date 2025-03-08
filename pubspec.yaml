@@ -30,13 +30,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc:
   intl:
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  dartz:
+  dio:
+  get_it:
+  flutter_bloc:
+  shared_preferences:
+  flutter_otp_text_field:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:
