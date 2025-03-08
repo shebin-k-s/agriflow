@@ -28,8 +28,6 @@ class CropsScreen extends StatelessWidget {
                   ? selectorState.selectedIndex
                   : 0;
 
-              final selectedField = recommendations[selectedIndex];
-
               return Column(
                 children: [
                   FieldSelectorView(

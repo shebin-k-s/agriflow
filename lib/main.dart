@@ -2,7 +2,6 @@ import 'package:agriflow/presentation/auth/cubit/button/button_cubit.dart';
 import 'package:agriflow/presentation/crops/bloc/field_selector/field_selector_cubit.dart';
 import 'package:agriflow/presentation/crops/bloc/recommendation/recommendation_cubit.dart';
 import 'package:agriflow/presentation/dashboard/bloc/cubit/fields_cubit.dart';
-import 'package:agriflow/presentation/main/pages/main_screen.dart';
 import 'package:agriflow/presentation/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
