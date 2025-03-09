@@ -7,7 +7,6 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/helpers/navigation.dart';
-import '../../../common/widgets/button/basic_app_button.dart';
 import '../../../common/widgets/snack_bar/custom_snack_bar.dart';
 import '../../../domain/usecases/auth/verify_otp.dart';
 import '../../../service_locator.dart';
@@ -74,10 +73,10 @@ class OtpScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 40),
-                  Icon(
+                  const Icon(
                     Icons.mark_email_read_outlined,
                     size: 80,
-                    color: const Color(0xFF2E7D32), // Green color for icon
+                    color: Color(0xFF2E7D32), // Green color for icon
                   ),
                   const SizedBox(height: 24),
                   const Text(
@@ -260,7 +259,7 @@ class _OtpTimerState extends State<OtpTimer> {
     if (_remainingTime > 0) {
       return Text(
         "Resend in ${_remainingTime}s",
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           color: Colors.black54, // Matching style from Forgot Password
         ),

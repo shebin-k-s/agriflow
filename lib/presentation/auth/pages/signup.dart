@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/helpers/navigation.dart';
-import '../../../common/widgets/button/basic_app_button.dart';
 import '../../../common/widgets/snack_bar/custom_snack_bar.dart';
 import '../../../data/models/auth/auth_req_params.dart';
 import '../../../domain/usecases/auth/send_otp.dart';

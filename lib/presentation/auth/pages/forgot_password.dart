@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/helpers/navigation.dart';
-import '../../../common/widgets/button/basic_app_button.dart';
 import '../../../common/widgets/snack_bar/custom_snack_bar.dart';
 import '../../../domain/usecases/auth/forgot_password.dart';
 import '../../../service_locator.dart';
