@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class FieldData {
@@ -14,6 +15,8 @@ class FieldData {
   final double annualTemperature;
   final List<CropRecommendation> cropRecommendations;
   final DateTime createdAt;
+  final DateTime? cropRecommendationsLastUpdated;
+  final DateTime? sensorReadingsLastUpdated;
 
   FieldData({
     required this.id,
@@ -29,6 +32,8 @@ class FieldData {
     required this.annualTemperature,
     required this.cropRecommendations,
     required this.createdAt,
+    this.cropRecommendationsLastUpdated,
+    this.sensorReadingsLastUpdated,
   });
 
   factory FieldData.fromJson(Map<String, dynamic> json) {
@@ -44,7 +49,13 @@ class FieldData {
           : Location(type: "Point", coordinates: []),
       sensorReadings: json['sensorReadings'] != null
           ? SensorReadings.fromJson(json['sensorReadings'])
-          : SensorReadings(moisture: 0, temperature: 0, pH: 0, nitrogen: 0, phosphorus: 0, potassium: 0),
+          : SensorReadings(
+              moisture: 0,
+              temperature: 0,
+              pH: 0,
+              nitrogen: 0,
+              phosphorus: 0,
+              potassium: 0),
       nutrientsNeeded: json['nutrientsNeeded'] != null
           ? NutrientsNeeded.fromJson(json['nutrientsNeeded'])
           : NutrientsNeeded(nitrogen: 0, phosphorus: 0, potassium: 0),
@@ -54,7 +65,16 @@ class FieldData {
               ?.map((item) => CropRecommendation.fromJson(item))
               .toList() ??
           [],
-      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : DateTime.now(),
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : DateTime.now(),
+      cropRecommendationsLastUpdated:
+          json['cropRecommendationsLastUpdated'] != null
+              ? DateTime.parse(json['cropRecommendationsLastUpdated'])
+              : null,
+      sensorReadingsLastUpdated: json['sensorReadingsLastUpdated'] != null
+          ? DateTime.parse(json['sensorReadingsLastUpdated'])
+          : null,
     );
   }
 
@@ -71,8 +91,13 @@ class FieldData {
       'nutrientsNeeded': nutrientsNeeded.toJson(),
       'annualRainfall': annualRainfall,
       'annualTemperature': annualTemperature,
-      'cropRecommendations': cropRecommendations.map((e) => e.toJson()).toList(),
+      'cropRecommendations':
+          cropRecommendations.map((e) => e.toJson()).toList(),
       'createdAt': createdAt.toIso8601String(),
+      'cropRecommendationsLastUpdated':
+          cropRecommendationsLastUpdated?.toIso8601String(),
+      'sensorReadingsLastUpdated':
+          sensorReadingsLastUpdated?.toIso8601String(),
     };
   }
 }
@@ -89,7 +114,10 @@ class Location {
     }
     return Location(
       type: json['type'] ?? "Point",
-      coordinates: (json['coordinates'] as List?)?.map((e) => (e as num).toDouble()).toList() ?? [],
+      coordinates: (json['coordinates'] as List?)
+              ?.map((e) => (e as num).toDouble())
+              .toList() ??
+          [],
     );
   }
 
@@ -120,7 +148,13 @@ class SensorReadings {
 
   factory SensorReadings.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return SensorReadings(moisture: 0, temperature: 0, pH: 0, nitrogen: 0, phosphorus: 0, potassium: 0);
+      return SensorReadings(
+          moisture: 0,
+          temperature: 0,
+          pH: 0,
+          nitrogen: 0,
+          phosphorus: 0,
+          potassium: 0);
     }
     return SensorReadings(
       moisture: (json['moisture'] ?? 0).toDouble(),
@@ -192,7 +226,12 @@ class CropRecommendation {
 
   factory CropRecommendation.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
-      return CropRecommendation(crop: '', compositeScore: 0, conditionMatch: 0, yieldScore: 0, id: '');
+      return CropRecommendation(
+          crop: '',
+          compositeScore: 0,
+          conditionMatch: 0,
+          yieldScore: 0,
+          id: '');
     }
     return CropRecommendation(
       crop: json['crop'] ?? '',

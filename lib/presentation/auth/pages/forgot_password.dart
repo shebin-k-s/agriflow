@@ -20,8 +20,17 @@ class ForgotPasswordScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forgot Password"),
+        title: const Text(
+          "Forgot Password",
+          style: TextStyle(
+            color: Color(0xFF2E7D32),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: false,
+        iconTheme: const IconThemeData(
+          color: Color(0xFF2E7D32), // Green color for back button
+        ),
       ),
       body: BlocProvider(
         create: (context) => ButtonCubit(),
@@ -64,6 +73,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 28,
+                      color: Color(0xFF2E7D32), // Green color from SigninScreen
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -85,35 +95,64 @@ class ForgotPasswordScreen extends StatelessWidget {
                               controller: emailController,
                               decoration: const InputDecoration(
                                 label: Text("Email Address"),
-                                suffixIcon: Icon(Icons.mail),
+                                suffixIcon: Icon(
+                                  Icons.mail_outline,
+                                  color: Color(0xFF388E3C),
+                                ),
+                                labelStyle: TextStyle(
+                                  color: Color(0xFF388E3C),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF388E3C),
+                                  ),
+                                ),
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "Email cannot be empty";
                                 }
-                                if (!value.endsWith('@gecskp.ac.in')) {
-                                  return "Only gecskp.ac.in domain are allowed";
-                                }
                                 return null;
                               },
                             ),
                             const SizedBox(height: 30),
-                            BasicAppButton(
-                              onPressed: () {
-                                if (formKey.currentState!.validate() &&
-                                    state is! ButtonLoadingState) {
-                                  FocusScope.of(context).unfocus();
-                                  context.read<ButtonCubit>().execute(
-                                    usecase: sl<ForgotPasswordUseCase>(),
-                                    params: {
-                                      'email': emailController.text,
-                                    },
-                                  );
-                                }
-                              },
-                              isLoading: state is ButtonLoadingState,
+                            SizedBox(
                               width: double.infinity,
-                              title: "Send OTP",
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (formKey.currentState!.validate() &&
+                                      state is! ButtonLoadingState) {
+                                    FocusScope.of(context).unfocus();
+                                    context.read<ButtonCubit>().execute(
+                                      usecase: sl<ForgotPasswordUseCase>(),
+                                      params: {
+                                        'email': emailController.text,
+                                      },
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  backgroundColor: const Color(0xFF388E3C), // Deep Green from SigninScreen
+                                ),
+                                child: state is ButtonLoadingState
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : const Text(
+                                        "SEND OTP",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                              ),
                             ),
                           ],
                         ),

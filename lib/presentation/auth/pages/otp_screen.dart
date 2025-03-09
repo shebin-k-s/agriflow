@@ -29,8 +29,17 @@ class OtpScreen extends StatelessWidget {
     final TextEditingController otpController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Verification"),
+        title: const Text(
+          "Verification",
+          style: TextStyle(
+            color: Color(0xFF2E7D32),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: false,
+        iconTheme: const IconThemeData(
+          color: Color(0xFF2E7D32), // Green color for back button
+        ),
       ),
       body: BlocProvider(
         create: (context) => ButtonCubit(),
@@ -65,16 +74,19 @@ class OtpScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 40),
-                  const Icon(
+                  Icon(
                     Icons.mark_email_read_outlined,
                     size: 80,
+                    color: const Color(0xFF2E7D32), // Green color for icon
                   ),
                   const SizedBox(height: 24),
                   const Text(
                     "Email Verification",
                     style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                      color:
+                          Color(0xFF2E7D32), // Green color from Forgot Password
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -82,8 +94,9 @@ class OtpScreen extends StatelessWidget {
                   const Text(
                     "We've sent a verification code to your email",
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
+                      fontSize: 14,
+                      color:
+                          Colors.black54, // Matching Forgot Password text style
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -93,7 +106,7 @@ class OtpScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: OtpTextField(
                       numberOfFields: 5,
-                      borderColor: Colors.grey.shade800,
+                      borderColor: const Color(0xFF388E3C), // Green color
                       showFieldAsBox: true,
                       margin: const EdgeInsets.only(right: 10),
                       borderWidth: 2.0,
@@ -108,36 +121,61 @@ class OtpScreen extends StatelessWidget {
                       textStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
+                        color: Color(0xFF388E3C), // Green color for text
                       ),
+                      focusedBorderColor: const Color(
+                          0xFF388E3C), // Green color for focused fields
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 30),
                   BlocBuilder<ButtonCubit, ButtonState>(
                     builder: (context, state) {
-                      return BasicAppButton(
-                        onPressed: () async {
-                          if (otpController.text.length != 5) {
-                            CustomSnackBar.show(
-                              context: context,
-                              message: "Please Enter the otp",
-                              isError: true,
-                            );
-                            return;
-                          }
-                          if (state is! ButtonLoadingState) {
-                            final sharedPref =
-                                await SharedPreferences.getInstance();
-                            final sessionId = sharedPref.getString("SESSIONID");
-                            context.read<ButtonCubit>().execute(
-                                usecase: sl<VerifyOtpUsecase>(),
-                                params: {
-                                  "otp": otpController.text,
-                                  "sessionId": sessionId
-                                });
-                          }
-                        },
-                        title: "Verify",
-                        isLoading: state is ButtonLoadingState,
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (otpController.text.length != 5) {
+                              CustomSnackBar.show(
+                                context: context,
+                                message: "Please Enter the otp",
+                                isError: true,
+                              );
+                              return;
+                            }
+                            if (state is! ButtonLoadingState) {
+                              final sharedPref =
+                                  await SharedPreferences.getInstance();
+                              final sessionId =
+                                  sharedPref.getString("SESSIONID");
+                              context.read<ButtonCubit>().execute(
+                                  usecase: sl<VerifyOtpUsecase>(),
+                                  params: {
+                                    "otp": otpController.text,
+                                    "sessionId": sessionId
+                                  });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            backgroundColor: const Color(
+                                0xFF388E3C), // Deep Green from Forgot Password
+                          ),
+                          child: state is ButtonLoadingState
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  "VERIFY",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                        ),
                       );
                     },
                   ),
@@ -149,11 +187,14 @@ class OtpScreen extends StatelessWidget {
                         "Didn't receive the code? ",
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Colors
+                              .black54, // Matching style from Forgot Password
                         ),
                       ),
                       OtpTimer(
                         onResendClick: resendOtp,
+                        textColor: const Color(
+                            0xFF388E3C), // Green color for resend text
                       ),
                     ],
                   ),
@@ -168,9 +209,14 @@ class OtpScreen extends StatelessWidget {
 }
 
 class OtpTimer extends StatefulWidget {
-  const OtpTimer({super.key, required this.onResendClick});
+  const OtpTimer({
+    super.key,
+    required this.onResendClick,
+    this.textColor = Colors.grey,
+  });
 
   final VoidCallback onResendClick;
+  final Color textColor;
 
   @override
   State<OtpTimer> createState() => _OtpTimerState();
@@ -214,9 +260,9 @@ class _OtpTimerState extends State<OtpTimer> {
     if (_remainingTime > 0) {
       return Text(
         "Resend in ${_remainingTime}s",
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
-          color: Colors.grey,
+          color: Colors.black54, // Matching style from Forgot Password
         ),
       );
     } else {
@@ -225,11 +271,12 @@ class _OtpTimerState extends State<OtpTimer> {
           startTimer();
           widget.onResendClick();
         },
-        child: const Text(
+        child: Text(
           "Resend",
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
+            color: widget.textColor, // Using the green color
           ),
         ),
       );

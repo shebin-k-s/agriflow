@@ -1,3 +1,4 @@
+import 'package:agriflow/data/models/currentCrop/current_crop_req_params.dart';
 import 'package:agriflow/data/models/field/field_req_params.dart';
 import 'package:agriflow/data/source/field/field_api_service.dart';
 import 'package:agriflow/domain/repository/field/field.dart';
@@ -13,5 +14,21 @@ class FieldRepositoryImpl extends FieldRepository {
   @override
   Future<Either> fetchField() {
     return sl<FieldApiService>().fetchField();
+  }
+
+  @override
+  Future<Either> deleteField(String fieldId) {
+    return sl<FieldApiService>().deleteField(fieldId);
+  }
+
+  @override
+  Future<Either> predictCrop(String fieldId) {
+    return sl<FieldApiService>().predictCrops(fieldId);
+  }
+  
+  @override
+  Future<Either> setCurrentCrop(CurrentCropReqParams crop) {
+      return sl<FieldApiService>().setCurrentCrops(crop);
+
   }
 }

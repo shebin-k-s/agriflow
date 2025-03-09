@@ -1,4 +1,4 @@
-
+import 'package:agriflow/presentation/auth/widgets/basic_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,9 +20,18 @@ class NewPasswordScreen extends StatelessWidget {
         TextEditingController();
 
     return Scaffold(
-      appBar:  AppBar(
-        title: const Text("Reset Password"),
+      appBar: AppBar(
+        title: const Text(
+          "Reset Password",
+          style: TextStyle(
+            color: Color(0xFF2E7D32),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: false,
+        iconTheme: const IconThemeData(
+          color: Color(0xFF2E7D32), // Green color for back button
+        ),
       ),
       body: BlocProvider(
         create: (context) => ButtonCubit(),
@@ -55,6 +64,8 @@ class NewPasswordScreen extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 28,
+                      color:
+                          Color(0xFF2E7D32), // Green color from other screens
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -62,6 +73,8 @@ class NewPasswordScreen extends StatelessWidget {
                     "Enter the token you received via email and set your new password.",
                     style: TextStyle(
                       fontSize: 14,
+                      color:
+                          Colors.black54, // Matching style from other screens
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -69,35 +82,27 @@ class NewPasswordScreen extends StatelessWidget {
                     key: formKey,
                     child: Column(
                       children: [
-                        TextFormField(
+                        BasicTextFormField(
                           controller: newPasswordController,
+                          suffixIcon: Icons.lock_outline,
+                          label: "Password",
                           obscureText: true,
-                          decoration: const InputDecoration(
-                          label: Text("New Password"),
-
-                          suffixIcon: Icon(Icons.lock),
-                          ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Password cannot be empty";
                             }
-                            if (value.length < 6) {
-                              return "Password must be at least 6 characters long";
-                            }
                             return null;
                           },
                         ),
-                        const SizedBox(height: 15),
-                        TextFormField(
+                        const SizedBox(height: 20.0),
+                        BasicTextFormField(
                           controller: confirmPasswordController,
-                          decoration: const InputDecoration(
-                          label: Text("Confirm Password"),
-                          suffixIcon: Icon(Icons.lock_outline),
-
-                          ),
+                          suffixIcon: Icons.lock_outline,
+                          label: "Confirm Password",
+                          obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "Please confirm your password";
+                              return "Confirm Password cannot be empty";
                             }
                             if (value != newPasswordController.text) {
                               return "Passwords do not match";
@@ -108,26 +113,48 @@ class NewPasswordScreen extends StatelessWidget {
                         const SizedBox(height: 30),
                         BlocBuilder<ButtonCubit, ButtonState>(
                           builder: (context, state) {
-                            return BasicAppButton(
-                              onPressed: () async {
-                                if (formKey.currentState!.validate() &&
-                                    state is! ButtonLoadingState) {
-                                  FocusScope.of(context).unfocus();
-                                  final sharedPref =
-                                      await SharedPreferences.getInstance();
-                                  final sessionId =
-                                      sharedPref.getString("SESSIONID");
-                                  context.read<ButtonCubit>().execute(
-                                      usecase: sl<ResetPasswordUsecase>(),
-                                      params: {
-                                        'sessionId': sessionId,
-                                        'password': newPasswordController.text,
-                                      });
-                                }
-                              },
-                              isLoading: state is ButtonLoadingState,
-                              width: 353,
-                              title: "Reset Password",
+                            return SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate() &&
+                                      state is! ButtonLoadingState) {
+                                    FocusScope.of(context).unfocus();
+                                    final sharedPref =
+                                        await SharedPreferences.getInstance();
+                                    final sessionId =
+                                        sharedPref.getString("SESSIONID");
+                                    context.read<ButtonCubit>().execute(
+                                        usecase: sl<ResetPasswordUsecase>(),
+                                        params: {
+                                          'sessionId': sessionId,
+                                          'password':
+                                              newPasswordController.text,
+                                        });
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  backgroundColor: const Color(
+                                      0xFF388E3C), // Deep Green from other screens
+                                ),
+                                child: state is ButtonLoadingState
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : const Text(
+                                        "RESET PASSWORD",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                              ),
                             );
                           },
                         ),

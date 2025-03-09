@@ -3,7 +3,10 @@ import 'package:agriflow/data/repository/field.dart';
 import 'package:agriflow/data/source/field/field_api_service.dart';
 import 'package:agriflow/domain/repository/field/field.dart';
 import 'package:agriflow/domain/usecases/field/add_field.dart';
+import 'package:agriflow/domain/usecases/field/delete_field.dart';
 import 'package:agriflow/domain/usecases/field/fetch_field.dart';
+import 'package:agriflow/domain/usecases/field/predict_crop.dart';
+import 'package:agriflow/domain/usecases/field/set_current_crop.dart';
 import 'package:get_it/get_it.dart';
 
 import 'data/repository/auth.dart';
@@ -42,4 +45,8 @@ void setupServiceLocator() {
   //device usecase
   sl.registerSingleton<AddFieldUsecase>(AddFieldUsecase());
   sl.registerSingleton<FetchFieldUsecase>(FetchFieldUsecase());
+  sl.registerSingleton<DeleteFieldUsecase>(DeleteFieldUsecase());
+  sl.registerSingleton<PredictFieldCropsUsecase>(PredictFieldCropsUsecase());
+  sl.registerSingleton<SetCurrentCropUsecase>(SetCurrentCropUsecase());
+
 }

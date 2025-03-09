@@ -1,5 +1,6 @@
 class ApiUrls {
   static const baseURL = "https://agriflow-backend.onrender.com/";
+  // static const baseURL = "http://10.42.0.155:3000/";
 
   static const apiV = "api/v1/";
 
@@ -15,4 +16,7 @@ class ApiUrls {
   static const addField = "$baseURL${apiV}field/add";
 
   static const fetchFields = "$baseURL${apiV}field/";
+  static const deleteField = "$baseURL${apiV}field/remove/";
+  static const predictCropRecommendation = "$baseURL${apiV}field/predict-crop/";
+  static const setCurrentCrop = "$baseURL${apiV}field/set-current-crop/";
 }

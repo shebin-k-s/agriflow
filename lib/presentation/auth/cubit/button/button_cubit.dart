@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
@@ -12,7 +14,6 @@ class ButtonCubit extends Cubit<ButtonState> {
     try {
       emit(ButtonLoadingState());
       Either result = await usecase.call(param: params);
-
       result.fold(
         (error) {
           emit(

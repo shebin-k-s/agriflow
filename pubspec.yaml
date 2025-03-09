@@ -43,6 +43,9 @@ dependencies:
   shared_preferences:
   flutter_otp_text_field:
   flutter_svg:
+  geocoding: ^2.1.1
+  google_places_flutter:
+  google_maps_flutter:
 
 dev_dependencies:
   flutter_test:

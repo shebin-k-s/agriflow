@@ -10,6 +10,11 @@ class FieldCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = field.sensorReadingsLastUpdated != null
+        ? DateFormat('MMM dd, yyyy • hh:mm a')
+            .format(field.sensorReadingsLastUpdated!)
+        : "Not updated yet";
+
     return Card(
       elevation: 2,
       child: Padding(
@@ -40,11 +45,15 @@ class FieldCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text(
-                  'Last Updated: ${DateFormat('hh:mm a').format(DateTime.now())}',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 12,
+                Expanded(
+                  child: Text(
+                    formattedDate,
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.right, // Align to the right
+                    softWrap: true, // Allow text to wrap
                   ),
                 ),
               ],

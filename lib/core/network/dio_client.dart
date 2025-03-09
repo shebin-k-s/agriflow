@@ -9,7 +9,7 @@ class DioClient {
               headers: {'Content-Type': 'application/json; charset=UTF-8'},
               responseType: ResponseType.json,
               sendTimeout: const Duration(seconds: 10),
-              receiveTimeout: const Duration(seconds: 20)),
+              receiveTimeout: const Duration(seconds: 120)),
         ) {
     _dio.interceptors.add(
       InterceptorsWrapper(

@@ -73,7 +73,7 @@ class BasicTextFormField extends StatelessWidget {
                   ? null
                   : Icon(
                       prefixIcon,
-                      color: iconColor ?? Colors.orange.shade600,
+                      color: iconColor ?? Colors.green.shade900,
                     ),
               suffixIcon: suffixWidget ??
                   (suffixIcon == null
@@ -84,7 +84,7 @@ class BasicTextFormField extends StatelessWidget {
                                 state.showPassword
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Colors.orange.shade600,
+                                color: Colors.green.shade900,
                               ),
                               onPressed: () => context
                                   .read<PasswordVisibilityCubit>()
@@ -92,7 +92,7 @@ class BasicTextFormField extends StatelessWidget {
                             )
                           : Icon(
                               suffixIcon,
-                              color: Colors.orange.shade600,
+                              color: Colors.green.shade900,
                             )),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
